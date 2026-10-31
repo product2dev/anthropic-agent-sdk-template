@@ -39,7 +39,7 @@ If you run `npm start` without a prompt, it uses a default one. The agent's repl
 - **Prompt and model:** edit `SYSTEM_PROMPT` and `model` in `src/agent.ts`, or set `CLAUDE_MODEL` in `.env`.
 - **Add a custom tool:** define it with `tool()` in `src/tools.ts` and add it to the server's `tools` array. Then add `mcp__utils__<tool_name>` to `allowedTools` in `src/agent.ts`.
 - **Let the agent change files or run commands:** add `"Edit"`, `"Write"` or `"Bash"` to both `tools` and `allowedTools`. The defaults are read-only on purpose.
-- **Load `CLAUDE.md` and `.claude/` settings:** set `settingSources: ["project"]`.
+- **Load `CLAUDE.md` and `.claude/` settings:** set `settingSources: ["project"]`. Claude Code reads `AGENTS.md` only when there's no `CLAUDE.md`, so if you add one, start it with `@AGENTS.md` to keep both.
 - **Limits:** `maxTurns` (20) and `maxBudgetUsd` ($1) stop a run that gets out of hand. Raise them as needed.
 
 The [TypeScript SDK reference](https://code.claude.com/docs/en/agent-sdk/typescript) lists every option.
