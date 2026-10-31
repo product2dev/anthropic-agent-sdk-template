@@ -10,7 +10,8 @@
   },
   "scripts": {
     "start": "tsx src/index.ts",
-    "build": "tsc",
+    "eval": "tsx evals/run.ts",
+    "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
