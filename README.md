@@ -30,6 +30,9 @@ If you run `npm start` without a prompt, it uses a default one. The agent's repl
 | `src/agent.ts` | Agent configuration: model, system prompt, tools, permissions and limits. |
 | `src/tools.ts` | Custom tools, served to the agent by an in-process MCP server. |
 | `src/hooks.ts` | Hooks that run your code at points in the agent loop. |
+| `evals/cases.ts` | Eval cases: prompts and checks on what the agent did. |
+| `evals/run.ts` | Runs the eval cases and reports pass/fail and cost. |
+| `AGENTS.md` | Instructions for coding agents working in this repo. |
 
 ## Customizing
 
@@ -41,11 +44,20 @@ If you run `npm start` without a prompt, it uses a default one. The agent's repl
 
 The [TypeScript SDK reference](https://code.claude.com/docs/en/agent-sdk/typescript) lists every option.
 
+## Evals
+
+`npm run eval` runs each case in `evals/cases.ts` through the agent and checks what it did. Run it after you change the prompt, model, tools or permissions. Each case calls the API, so a run costs money, up to `maxBudgetUsd` per case. To run only some cases, pass part of their name: `npm run eval -- "time zone"`.
+
+When you change what the agent does, add a case for it. Check tool calls and their inputs where you can. The wording of answers changes between runs, so a check on answer text should look for one key fact, not a sentence.
+
+Evals aren't part of CI, because they need an API key and cost money on every run.
+
 ## Scripts
 
 | Command | What it does |
 | --- | --- |
 | `npm start -- "<prompt>"` | Run the agent |
+| `npm run eval` | Run the eval cases against the API |
 | `npm run typecheck` | Type-check without building |
 | `npm run build` | Compile to `dist/` |
 
